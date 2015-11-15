@@ -78,7 +78,7 @@ def main():
     print("Password (empty for none): ", end="", file=sys.stderr, flush=True)
     password = getpass("") if sys.stdin.isatty() else input()
 
-    bot = ESpeaker(debug_print=True)
+    bot = ESpeaker(debug_print=False)
     bot.connect(irc_host, irc_port)
     threading.Thread(target=bot.start_server, args=[port], daemon=True).start()
 
