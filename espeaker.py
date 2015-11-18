@@ -36,6 +36,7 @@ class ESpeaker(IRCBot):
 
     def start_server(self, port):
         s = socket.socket()
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         try:
             s.bind(("", port))
             s.listen(5)
