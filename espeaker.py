@@ -17,7 +17,6 @@ from xml.sax.saxutils import escape
 import conf
 import socket
 import sys
-import threading
 
 usage = "Usage: espeaker <port> <irc-host> <irc-port> <nickname> <channel>"
 
@@ -40,7 +39,7 @@ class ESpeaker(IRCBot):
         try:
             s.bind(("", port))
             s.listen(5)
-            while True:
+            while self.alive:
                 client, address = s.accept()
                 client.sendall(conf.connect_message.encode("utf8"))
                 self.clients.append(client)
@@ -80,13 +79,20 @@ def main():
 
     bot = ESpeaker(debug_print=False)
     bot.connect(irc_host, irc_port)
-    threading.Thread(target=bot.start_server, args=[port], daemon=True).start()
-
     if password:
         bot.password(password)
     bot.register(nickname)
     bot.join(channel)
-    bot.listen()
+
+    def stop_server():
+        # Connect to server so accept() call returns.
+        s = socket.socket()
+        s.connect(("", port))
+        s.shutdown(socket.SHUT_RDWR)
+        s.close()
+
+    bot.listen_async(callback=stop_server)
+    bot.start_server(port)
     print("Disconnected from server.")
 
 if __name__ == "__main__":
