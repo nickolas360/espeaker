@@ -18,6 +18,8 @@ import conf
 import socket
 import sys
 
+__version__ = "0.1.0"
+
 usage = "Usage: espeaker <port> <irc-host> <irc-port> <nickname> <channel>"
 
 ssml_template = """
