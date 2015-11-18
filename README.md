@@ -4,7 +4,7 @@ espeaker
 Version 0.1.0
 
 **espeaker** is an IRC bot which allows users to listen to IRC with the
-text-to-speech program [espeak]. It converts IRC messages into SSML data than
+text-to-speech program [espeak]. It converts IRC messages into SSML data that
 can be piped to and read by espeak. Users can be given unique voices.
 
 [espeak]: https://en.wikipedia.org/wiki/ESpeak
