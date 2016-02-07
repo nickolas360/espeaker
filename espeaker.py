@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (C) 2015 nickolas360 (https://github.com/nickolas360)
+# Copyright (C) 2015=2016 nickolas360 <contact@nickolas360.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 from pyrcb import IRCBot
 from getpass import getpass
 from xml.sax.saxutils import escape
@@ -18,11 +19,11 @@ import conf
 import socket
 import sys
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
-usage = "Usage: espeaker <port> <irc-host> <irc-port> <nickname> <channel>"
+USAGE = "Usage: espeaker <port> <irc-host> <irc-port> <nickname> <channel>"
 
-ssml_template = """
+SSML_TEMPLATE = """
 <voice name="{0}">
     <prosody pitch="{1}">
         {2}
@@ -64,14 +65,14 @@ class ESpeaker(IRCBot):
         if is_query:
             return
         voice, pitch = conf.voices[nickname]
-        ssml_data = ssml_template.format(voice, pitch, escape(message))
+        ssml_data = SSML_TEMPLATE.format(voice, pitch, escape(message))
         self.broadcast(ssml_data.encode("utf8"))
         print("<{0}> {1}".format(nickname, message))
 
 
 def main():
     if len(sys.argv[1:]) != 5:
-        print(usage)
+        print(USAGE)
         return
 
     port, irc_host, irc_port, nickname, channel = sys.argv[1:]
@@ -80,7 +81,7 @@ def main():
     print("Password (empty for none): ", end="", file=sys.stderr, flush=True)
     password = getpass("") if sys.stdin.isatty() else input()
 
-    bot = ESpeaker(debug_print=False)
+    bot = ESpeaker()
     bot.connect(irc_host, irc_port)
     if password:
         bot.password(password)
