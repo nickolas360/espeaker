@@ -1,7 +1,7 @@
 espeaker
 ========
 
-Version 0.1.1
+Version 0.1.2
 
 **espeaker** is an IRC bot which allows users to listen to IRC with the
 text-to-speech program [espeak]. It converts IRC messages into SSML data that
