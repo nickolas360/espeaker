@@ -1,7 +1,7 @@
 espeaker
 ========
 
-Version 0.1.2
+Version 0.1.3
 
 **espeaker** is an IRC bot which allows users to listen to IRC with the
 text-to-speech program [espeak]. It converts IRC messages into SSML data that
@@ -27,6 +27,13 @@ server (which is `<irc-port>`).
 
 espeaker will ask for a NickServ password when started. Supply an empty
 password if you don't want to use one.
+
+What's new
+----------
+
+Version 0.1.3:
+
+* Updated pyrcb.
 
 Dependencies
 ------------
