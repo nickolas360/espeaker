@@ -19,7 +19,7 @@ import conf
 import socket
 import sys
 
-__version__ = "0.1.6"
+__version__ = "0.1.7"
 
 USAGE = "Usage: espeaker <port> <irc-host> <irc-port> <nickname> <channel>"
 
