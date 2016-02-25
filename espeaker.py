@@ -70,12 +70,12 @@ class ESpeaker(IRCBot):
         print("<{0}> {1}".format(nickname, message))
 
 
-def main():
-    if len(sys.argv[1:]) != 5:
+def main(argv):
+    if len(argv[1:]) != 5:
         print(USAGE)
         return
 
-    port, irc_host, irc_port, nickname, channel = sys.argv[1:]
+    port, irc_host, irc_port, nickname, channel = argv[1:]
     port, irc_port = int(port), int(irc_port)
 
     print("Password (empty for none): ", end="", file=sys.stderr, flush=True)
@@ -100,4 +100,4 @@ def main():
     print("Disconnected from server.")
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv)
