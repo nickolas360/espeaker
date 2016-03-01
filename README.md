@@ -1,7 +1,7 @@
 espeaker
 ========
 
-Version 0.1.7
+Version 0.1.8
 
 **espeaker** is an IRC bot which allows users to listen to IRC with the
 text-to-speech program [espeak]. It converts IRC messages into SSML data that
@@ -30,6 +30,10 @@ password if you don't want to use one.
 
 What's new
 ----------
+
+Version 0.1.8:
+
+* Updated pyrcb.
 
 Version 0.1.7:
 
