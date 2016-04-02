@@ -36,8 +36,10 @@ class ESpeaker(IRCBot):
     def __init__(self, *args, **kwargs):
         super(ESpeaker, self).__init__(*args, **kwargs)
         self.clients = []
+        self.port = None
 
     def start_server(self, port):
+        self.port = port
         s = socket.socket()
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         try:
@@ -50,6 +52,13 @@ class ESpeaker(IRCBot):
         finally:
             s.shutdown(socket.SHUT_RDWR)
             s.close()
+
+    def stop_server(self):
+        # Connect to server so accept() call returns.
+        s = socket.socket()
+        s.connect(("", self.port))
+        s.shutdown(socket.SHUT_RDWR)
+        s.close()
 
     def broadcast(self, message):
         disconnected = []
@@ -88,16 +97,16 @@ def main(argv):
     bot.register(nickname)
     bot.join(channel)
 
-    def stop_server():
-        # Connect to server so accept() call returns.
-        s = socket.socket()
-        s.connect(("", port))
-        s.shutdown(socket.SHUT_RDWR)
-        s.close()
+    server_thread = bot.start_thread(bot.start_server, args=[port])
+    try:
+        bot.listen()
+    except KeyboardInterrupt:
+        pass
 
-    bot.listen_async(callback=stop_server)
-    bot.start_server(port)
     print("Disconnected from server.")
+    print("Stopping local server...")
+    bot.stop_server()
+    server_thread.join()
 
 if __name__ == "__main__":
     main(sys.argv)
