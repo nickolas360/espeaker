@@ -56,7 +56,10 @@ class ESpeaker(IRCBot):
     def stop_server(self):
         # Connect to server so accept() call returns.
         s = socket.socket()
-        s.connect(("", self.port))
+        try:
+            s.connect(("", self.port))
+        except ConnectionError:
+            return
         s.shutdown(socket.SHUT_RDWR)
         s.close()
 
