@@ -8,13 +8,13 @@ from pyrcb2 import IDefaultDict
 
 # Maps nicknames to tuples containing a voice name and a pitch.
 voices = IDefaultDict(lambda: ("en-us", "70"), {
-    "nickname1": ("en-uk+f3", "65"),
+    "nickname1": ("en+f3", "65"),
     "nickname2": ("en-us+m5", "40"),
 })
 
 # Sent to users when they first connect to espeaker.
 # XML comments are only spoken when running espeak without SSML (option -m).
 connect_message = """\
-<!-- If you can hear this, you are not running espeak correctly.
-You must run espeak with option dash lowercase m. -->
+<!-- If you can hear this, you are not running espeak correctly. -->
+<!-- You must run espeak with option dash lowercase m. -->
 """

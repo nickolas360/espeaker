@@ -19,7 +19,7 @@ import asyncio
 import conf
 import sys
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 USAGE = """\
 Usage: espeaker <port> <irc-host> <irc-port> [--ssl] <nickname> <channel>\
